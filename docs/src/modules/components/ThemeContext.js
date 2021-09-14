@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { enUS, zhCN, faIR, ruRU, ptBR, esES, frFR, deDE, jaJP } from '@material-ui/core/locale';
 import { blue, pink } from '@material-ui/core/colors';
+import { getTheme } from '@freely/design-system';
 import { getCookie } from 'docs/src/modules/utils/helpers';
 import useLazyCSS from 'docs/src/modules/utils/useLazyCSS';
 
@@ -186,40 +187,14 @@ export function ThemeProvider(props) {
   const theme = React.useMemo(() => {
     const nextTheme = createTheme(
       {
-        direction,
+        ...getTheme('en'),
         nprogress: {
           color: paletteType === 'light' ? '#000' : '#fff',
         },
-        palette: {
-          primary: {
-            main: paletteType === 'light' ? blue[700] : blue[200],
-          },
-          secondary: {
-            main: paletteType === 'light' ? darken(pink.A400, 0.1) : pink[200],
-          },
-          type: paletteType,
-          background: {
-            default: paletteType === 'light' ? '#fff' : '#121212',
-          },
-          ...paletteColors,
-        },
-        // v5 migration
-        props: {
-          MuiBadge: {
-            overlap: 'rectangular',
-          },
-        },
-        spacing,
       },
-      dense ? highDensity : null,
       languageMap[userLanguage],
     );
 
-    nextTheme.palette.background.level2 =
-      paletteType === 'light' ? nextTheme.palette.grey[100] : '#333';
-
-    nextTheme.palette.background.level1 =
-      paletteType === 'light' ? '#fff' : nextTheme.palette.grey[900];
 
     return nextTheme;
   }, [dense, direction, paletteColors, paletteType, spacing, userLanguage]);

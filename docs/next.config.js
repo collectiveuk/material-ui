@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const withFonts = require("next-fonts");
+const withTM = require("next-transpile-modules")(["@freely/design-system"]);
 const pkg = require('../package.json');
 const { findPages } = require('./src/modules/utils/find');
 const { LANGUAGES, LANGUAGES_SSR } = require('./src/modules/constants');
@@ -20,7 +22,8 @@ const reactMode = 'legacy';
 // eslint-disable-next-line no-console
 console.log(`Using React '${reactMode}' mode.`);
 
-module.exports = {
+module.exports = withTM(withFonts(
+      {
   typescript: {
     // Motivated by https://github.com/zeit/next.js/issues/7687
     ignoreDevErrors: true,
@@ -184,4 +187,5 @@ module.exports = {
     reactMode: reactMode.startsWith('legacy') ? 'legacy' : reactMode,
   },
   reactStrictMode: reactMode === 'legacy-strict',
-};
+}
+));
