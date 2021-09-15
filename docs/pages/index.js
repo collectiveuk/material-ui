@@ -1,5 +1,4 @@
 import React from 'react';
-import * as PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -7,15 +6,11 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { BANNER_HEIGHT } from 'docs/src/modules/constants';
 import Steps from 'docs/src/pages/landing/Steps';
-import Themes from 'docs/src/pages/landing/Themes';
 import QuickWord from 'docs/src/pages/landing/QuickWord';
-import Sponsors, {
+import {
   getInitialProps as getInitialSponsorsProps,
 } from 'docs/src/pages/landing/Sponsors';
-import Users from 'docs/src/pages/landing/Users';
-import Quotes from 'docs/src/pages/landing/Quotes';
 import Pro from 'docs/src/pages/landing/Pro';
-import AppFooter from 'docs/src/modules/components/AppFooter';
 import AppFrame from 'docs/src/modules/components/AppFrame';
 import Link from 'docs/src/modules/components/Link';
 import Head from 'docs/src/modules/components/Head';
@@ -114,9 +109,7 @@ const GettingStartedLink = React.forwardRef((props, ref) => {
   return <Link href="/getting-started/installation" naked ref={ref} {...props} />;
 });
 
-export default function LandingPage(props) {
-  const { sponsorsProps } = props;
-
+export default function LandingPage() {
   React.useEffect(() => {
     loadDependencies();
   }, []);
@@ -179,12 +172,7 @@ export default function LandingPage(props) {
           <Pro />
           <QuickWord />
           <Steps />
-          <Themes />
-          <Sponsors {...sponsorsProps} />
-          <Quotes />
-          <Users />
         </main>
-        <AppFooter />
       </div>
       <script
         type="application/ld+json"
@@ -211,7 +199,6 @@ export default function LandingPage(props) {
 }
 
 LandingPage.propTypes = {
-  sponsorsProps: PropTypes.object.isRequired,
 };
 
 LandingPage.getInitialProps = async () => {

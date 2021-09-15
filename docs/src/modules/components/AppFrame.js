@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { withStyles, useTheme } from '@material-ui/core/styles';
-import NProgress from 'nprogress';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MuiLink from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
